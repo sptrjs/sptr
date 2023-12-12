@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noUnusedLocals": true,
+    "useUnknownInCatchVariables": false,
+    "declaration": true,
+    "esModuleInterop": true
+  },
+  "include": ["./src", "sptr.config.ts", "eslint.config.js"],
+  "exclude": ["tests"]
+}
