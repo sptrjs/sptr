@@ -35,11 +35,14 @@
   ],
 
   "cSpell.words": [
-    "antfu",
-    "jiti",
-    "picocolors",
-    "pluginutils",
-    "sptr",
-    "vitepress"
-  ]
+		"antfu",
+		"jiti",
+		"jsnext",
+		"onwarn",
+		"picocolors",
+		"pluginutils",
+		"sptr",
+		"sptrjs",
+		"vitepress"
+	]
 }

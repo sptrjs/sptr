@@ -11,6 +11,6 @@
     "declaration": true,
     "esModuleInterop": true
   },
-  "include": ["./src", "sptr.config.ts", "eslint.config.js"],
+  "include": ["src", "eslint.config.js"],
   "exclude": ["tests"]
 }

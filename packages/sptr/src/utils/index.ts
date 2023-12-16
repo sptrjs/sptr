@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import type { Alias } from '@rollup/plugin-alias'
-import type { AliasOptions } from './types/alias'
+import type { AliasOptions } from '../types/alias'
 
 export type { RollupNodeResolveOptions } from '@rollup/plugin-node-resolve'
 export { type FilterPattern, createFilter, normalizePath } from '@rollup/pluginutils'
@@ -17,6 +17,7 @@ export type {
   RollupError,
 } from 'rollup'
 
+export type SptrScope = `sptr:${string}`
 export type MaybeArray<T> = T | T[]
 export type MaybePromise<T> = T | Promise<T>
 export type MaybeGetter<T> = T | (() => MaybePromise<T>)
@@ -71,6 +72,18 @@ export function inArray<T>(val: MaybeArray<T>): T[] {
   return isArray(val) ? val : [val]
 }
 
+export function unArray<T>(val: T | T[]): T | T[] {
+  return isArray(val)
+    ? val.length === 1 ? val[0] : val
+    : val
+}
+
+export function unDepArray<T>(val: T | T[]): T | T[] {
+  return isArray(val)
+    ? val.length === 1 ? unDepArray(val[0]) : val
+    : val
+}
+
 export type MaybeFunc<T> = SptrOptionsFunction<T> | T
 
 export type SptrOptionsFunction<T> = (args: Record<string, any>) => MaybePromise<T>
@@ -98,23 +111,6 @@ export function lookupFile(dir: string, formats: string[], options?: LookupFileO
     && (!options?.rootDir || parentDir.startsWith(options?.rootDir))
   )
     return lookupFile(parentDir, formats, options)
-}
-
-export function isEsmToPath(filePath: string, def: boolean = false): boolean {
-  if (/\.m[jt]s$/.test(filePath)) {
-    return true
-  }
-  else if (/\.c[jt]s$/.test(filePath)) {
-    return false
-  }
-  else {
-    try {
-      const pkg = lookupFile(path.dirname(filePath), ['package.json'])
-      return !!pkg && JSON.parse(pkg).type === 'module'
-    }
-    catch (e) {}
-  }
-  return def
 }
 
 export function emptyDir(dir: string, skip?: string[]): void {
@@ -229,4 +225,12 @@ function normalizeSingleAlias({ find, replacement, customResolver }: Alias): Ali
     alias.customResolver = customResolver
 
   return alias
+}
+
+export function tryStatSync(file: string): fs.Stats | undefined {
+  try {
+    return fs.statSync(file, { throwIfNoEntry: false })
+  }
+  catch {
+  }
 }

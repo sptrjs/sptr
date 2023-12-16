@@ -4,7 +4,9 @@ import type { DefaultTheme } from 'vitepress'
 import pkg from '../../package.json'
 
 export default defineConfig({
-  title: 'Sptr',
+  lang: 'zh-CN',
+
+  title: 'Sptr.js',
 
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/vitepress-logo-mini.svg' }],
@@ -24,16 +26,16 @@ export default defineConfig({
 
     sidebar: {
       '/guide/': { base: '/guide/', items: sidebarGuide() },
-      '/reference/': { base: '/reference/', items: sidebarReference() },
+      '/reference/': { base: '/reference/', items: sidebarApi() },
     },
 
     editLink: {
-      pattern: 'https://github.com/vuejs/vitepress/edit/main/docs/:path',
+      pattern: 'https://github.com/sptrjs/sptr/edit/main/docs/:path',
       text: 'Edit this page on GitHub',
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' },
+      { icon: 'github', link: 'https://github.com/sptrjs/sptr' },
     ],
 
     footer: {
@@ -61,13 +63,13 @@ function nav(): DefaultTheme.NavItem[] {
   return [
     {
       text: '指引',
-      link: '/guide/what-is-vitepress',
+      link: '/guide/index',
       activeMatch: '/guide/',
     },
     {
       text: '参考',
-      link: '/reference/site-config',
-      activeMatch: '/reference/',
+      link: '/api/index',
+      activeMatch: '/api/',
     },
     {
       text: pkg.version,
@@ -85,22 +87,14 @@ function nav(): DefaultTheme.NavItem[] {
   ]
 }
 
-/* prettier-ignore */
 function sidebarGuide(): DefaultTheme.SidebarItem[] {
   return [
+    { text: '开始', link: 'index' },
+    { text: '命令行接口', link: 'cli' },
+    { text: 'Javascript API', link: 'javascript-api' },
+
     {
-      text: 'Introduction',
-      collapsed: false,
-      items: [
-        { text: 'What is VitePress?', link: 'what-is-vitepress' },
-        { text: 'Getting Started', link: 'getting-started' },
-        { text: 'Routing', link: 'routing' },
-        { text: 'Deploy', link: 'deploy' },
-      ],
-    },
-    {
-      text: 'Writing',
-      collapsed: false,
+      text: '基础',
       items: [
         { text: 'Markdown Extensions', link: 'markdown' },
         { text: 'Asset Handling', link: 'asset-handling' },
@@ -109,9 +103,9 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { text: 'Internationalization', link: 'i18n' },
       ],
     },
+
     {
-      text: 'Customization',
-      collapsed: false,
+      text: '进阶',
       items: [
         { text: 'Using a Custom Theme', link: 'custom-theme' },
         { text: 'Extending the Default Theme', link: 'extending-default-theme' },
@@ -120,19 +114,13 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { text: 'Connecting to a CMS', link: 'cms' },
       ],
     },
-    {
-      text: 'Experimental',
-      collapsed: false,
-      items: [
-        { text: 'MPA Mode', link: 'mpa-mode' },
-        { text: 'Sitemap Generation', link: 'sitemap-generation' },
-      ],
-    },
-    { text: 'Config & API Reference', base: '/reference/', link: 'site-config' },
+
+    { text: '配置选项', link: 'configuration-options' },
+    { text: '插件开发', link: 'plugin-development' },
   ]
 }
 
-function sidebarReference(): DefaultTheme.SidebarItem[] {
+function sidebarApi(): DefaultTheme.SidebarItem[] {
   return [
     {
       text: 'Reference',

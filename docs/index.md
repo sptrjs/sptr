@@ -11,10 +11,10 @@ hero:
   actions:
     - theme: brand
       text: 开始吧
-      link: /guide/getting-started
+      link: /guide/
     - theme: alt
       text: 在 GitHub 上查看
-      link: https://github.com/vuejs/vitepress
+      link: https://github.com/sptrjs/sptr
   image:
     src: /vitepress-logo-large.webp
     alt: VitePress

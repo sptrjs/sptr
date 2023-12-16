@@ -1,8 +1,9 @@
 import { extname, relative } from 'node:path'
 import type { CommonOptions, Loader, TransformResult } from 'esbuild'
-import type { Plugin, PluginContext } from 'rollup'
+import type { PluginContext } from 'rollup'
 import { transform } from 'esbuild'
-import { type FilterPattern, createFilter } from '../utils'
+import { type FilterPattern, createFilter } from '../../utils'
+import type { InsidePlugin } from '..'
 
 const DefaultLoaders: Record<string, Loader> = {
   '.js': 'js',
@@ -28,7 +29,7 @@ export type ESBuildOptions = CommonOptions & {
   loaders?: Record<string, Loader | false>
 }
 
-export function esbuildPlugin(options: ESBuildOptions): Plugin {
+export function esbuildPlugin(options: ESBuildOptions): InsidePlugin {
   const {
     include = /\.(ts|js|tsx|jsx)$/,
     exclude = /node_modules/,
