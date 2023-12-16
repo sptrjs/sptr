@@ -1,6 +1,6 @@
 {
   "name": "sptr",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "esm cli tools",
   "license": "MIT",
   "bugs": { "url": "https://github.com/sptrjs/sptr/issues" },
